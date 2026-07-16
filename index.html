@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/favicon-3.png">
+<meta name="description" content="Kiran Kumar K — Enterprise Cybersecurity Analyst. 50+ VAPTs, 150+ Incidents, NASA Disclosure. VAPT · SOC · Cloud Security · Threat Hunting.">
+<meta name="keywords" content="Cybersecurity Analyst, Security Engineer, VAPT, SOC, Penetration Testing, Bengaluru">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Kiran Kumar K">
+<meta name="theme-color" content="#0a0e27">
+<link rel="canonical" href="https://kirankumark.in/">
+<title>Kiran Kumar K — Enterprise Cybersecurity Analyst | VAPT · SOC · Cloud</title>
+
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://kirankumark.in/">
+<meta property="og:title" content="Kiran Kumar K — Cybersecurity Analyst">
+<meta property="og:description" content="50+ VAPTs, 150+ Incidents, Threat Hunting, Zero-Trust Architecture">
+<meta property="og:image" content="https://kirankumark.in/images/og-cover.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kiran Kumar K",
+  "url": "https://kirankumark.in/",
+  "jobTitle": "Security Analyst",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Indian Institute of Science (IISc) Bengaluru"
+  },
+  "email": "mailto:kirankumark.sec@gmail.com",
+  "sameAs": ["https://github.com/KIRAN-KUMAR-K3", "https://linkedin.com/in/kiran-kumar-k3"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+:root {
+  --bg-dark: #0a0e27;
+  --bg-darker: #050810;
+  --bg-card: #0f1535;
+  --accent-cyan: #00d4ff;
+  --accent-blue: #0099ff;
+  --accent-purple: #6600ff;
+  --accent-red: #ff0055;
+  --text-primary: #ffffff;
+  --text-secondary: #a0b0d0;
+  --border-color: rgba(0, 212, 255, 0.2);
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* ANIMATED BACKGROUND GRID */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  opacity: 0.03;
+  z-index: -1;
+  background-image: 
+    linear-gradient(0deg, var(--accent-cyan) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent-cyan) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+/* SCROLL PROGRESS */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+  z-index: 9999;
+  width: 0%;
+}
+
+/* GLITCH EFFECT */
+@keyframes glitch {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+    transform: translate(2px, 2px);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+    transform: translate(2px, -2px);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+    transform: translate(0);
+  }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  color: var(--accent-cyan);
+  width: 100%;
+  animation: glitch 2s infinite;
+  z-index: -1;
+}
+
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: var(--accent-red);
+  width: 100%;
+  animation: glitch 2s infinite reverse;
+  z-index: -1;
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  backdrop-filter: blur(30px);
+  background: rgba(10, 14, 39, 0.85);
+  border-bottom: 2px solid var(--border-color);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+}
+
+.nav-logo {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: -1px;
+}
+
+.nav-logo-hex {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  overflow: hidden;
+}
+
+.nav-logo-hex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent-cyan);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-nav {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid transparent;
+}
+
+.btn-nav-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+.btn-nav-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.7);
+}
+
+.btn-nav-secondary {
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.btn-nav-secondary:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+#heroCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 40px 20px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1.5px solid var(--border-color);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 30px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.5); }
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7); }
+  50% { box-shadow: 0 0 0 10px rgba(0, 212, 255, 0); }
+}
+
+.hero-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(48px, 12vw, 120px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp 1s ease 0.2s both;
+  text-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(18px, 4vw, 32px);
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease 0.4s both;
+  font-weight: 300;
+}
+
+.hero-description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 40px;
+  animation: fadeInUp 1s ease 0.6s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease 0.8s both;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 50px rgba(0, 212, 255, 0.7);
+}
+
+.btn-secondary {
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+  margin-top: 80px;
+  padding-top: 60px;
+  border-top: 1px solid var(--border-color);
+  animation: fadeInUp 1s ease 1s both;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 42px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  background: rgba(0, 212, 255, 0.05);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+
+.marquee-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.marquee-item strong {
+  color: var(--accent-cyan);
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* SECTIONS */
+section {
+  position: relative;
+  padding: 100px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-dark {
+  background: linear-gradient(135deg, rgba(15, 21, 53, 0.5) 0%, rgba(10, 14, 39, 0.5) 100%);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: '';
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-cyan), transparent);
+}
+
+.section-eyebrow::after {
+  background: linear-gradient(90deg, transparent, var(--accent-cyan));
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-description {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* GLASS CARDS */
+.glass-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+  transform: translateY(-10px);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+/* IMPACT DASHBOARD */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.impact-card {
+  background: rgba(15, 21, 53, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.impact-card:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);
+  transform: translateY(-8px);
+}
+
+.impact-card:hover::after {
+  opacity: 1;
+}
+
+.impact-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.impact-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 10px;
+}
+
+.impact-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.impact-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* SERVICES GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 60px;
+}
+
+.service-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 35px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  transition: left 0.5s ease;
+}
+
+.service-card:hover::before {
+  left: 100%;
+}
+
+.service-card:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.15);
+  transform: translateY(-10px);
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.service-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.service-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  letter-spacing: 0.5px;
+}
+
+/* EXPERIENCE TIMELINE */
+.experience-timeline {
+  position: relative;
+  margin-top: 60px;
+  padding-left: 50px;
+}
+
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-blue), transparent);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.experience-item {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.experience-dot {
+  position: absolute;
+  left: -35px;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 3px solid var(--accent-cyan);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.experience-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--border-color);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 10px;
+}
+
+.experience-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.experience-company {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  margin-bottom: 10px;
+}
+
+.experience-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 15px;
+}
+
+.experience-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.achievement-card {
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.achievement-card strong {
+  color: var(--accent-cyan);
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 25px;
+  margin-top: 60px;
+}
+
+.project-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 153, 255, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover .project-image {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 153, 255, 0.2));
+  transform: scale(1.05);
+}
+
+.project-content {
+  padding: 25px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #22c55e;
+  width: fit-content;
+  margin-bottom: 12px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: dotPulse 2s infinite;
+}
+
+.project-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.project-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color);
+}
+
+.project-link {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid var(--border-color);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.project-link:hover {
+  background: rgba(0, 212, 255, 0.2);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.project-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+  transform: translateY(-10px);
+}
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.skill-category {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+}
+
+.skill-category:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+}
+
+.skill-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-item {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* CERTIFICATIONS */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.cert-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.cert-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.cert-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.cert-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.cert-issuer {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* BUG BOUNTY */
+.bounty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.bounty-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px;
+  transition: all 0.4s ease;
+}
+
+.bounty-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+}
+
+.bounty-org {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.bounty-vuln {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.bounty-severity {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.severity-critical {
+  background: rgba(255, 0, 85, 0.15);
+  border: 1px solid rgba(255, 0, 85, 0.3);
+  color: #ff0055;
+}
+
+.severity-high {
+  background: rgba(255, 102, 0, 0.15);
+  border: 1px solid rgba(255, 102, 0, 0.3);
+  color: #ff6600;
+}
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 60px;
+  align-items: start;
+}
+
+.contact-method {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.contact-method:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  transform: translateX(10px);
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.contact-text {
+  flex: 1;
+}
+
+.contact-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.contact-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-form {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 35px;
+  backdrop-filter: blur(20px);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 212, 255, 0.05);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.btn-submit:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 50px rgba(0, 212, 255, 0.6);
+}
+
+/* FOOTER */
+footer {
+  background: rgba(10, 14, 39, 0.8);
+  border-top: 1px solid var(--border-color);
+  padding: 40px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.footer-hex {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.footer-hex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.footer-copyright {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* AUTOMATION LAB */
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 60px;
+}
+
+.lab-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px;
+  transition: all 0.4s ease;
+}
+
+.lab-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  transform: translateY(-8px);
+}
+
+.lab-terminal {
+  background: #000;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.terminal-bar {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.terminal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.terminal-text {
+  color: var(--accent-cyan);
+}
+
+.terminal-output {
+  color: #22c55e;
+  margin-top: 5px;
+}
+
+.lab-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.lab-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* VISION SECTION */
+.vision-section {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 21, 53, 0.8) 0%, rgba(10, 14, 39, 0.8) 100%);
+  border-top: 2px solid var(--border-color);
+}
+
+.vision-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.vision-hex {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+  overflow: hidden;
+}
+
+.vision-hex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vision-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vision-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 5px;
+}
+
+.vision-badge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 102, 0, 0.15);
+  border: 1px solid rgba(255, 102, 0, 0.3);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ff6600;
+}
+
+.vision-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff6600;
+  animation: dotPulse 2s infinite;
+}
+
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.vision-card {
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px;
+  transition: all 0.4s ease;
+}
+
+.vision-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  transform: translateY(-8px);
+}
+
+.vision-icon {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.vision-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.vision-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vision-item {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vision-item::before {
+  content: '→';
+  color: var(--accent-cyan);
+  font-size: 10px;
+}
+
+.vision-cta {
+  background: rgba(15, 21, 53, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 50px;
+  text-align: center;
+}
+
+.vision-cta-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vision-cta-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 30px;
+  line-height: 1.8;
+}
+
+.vision-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+
+  .vision-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 80px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+  }
+
+  .nav-logo {
+    font-size: 16px;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-nav {
+    padding: 8px 16px;
+    font-size: 10px;
+  }
+
+  .hero {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 10vw, 72px);
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .impact-grid,
+  .services-grid,
+  .projects-grid,
+  .skills-grid,
+  .certs-grid,
+  .bounty-grid,
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-timeline {
+    padding-left: 30px;
+  }
+
+  .experience-dot {
+    left: -20px;
+  }
+
+  .achievement-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    display: none;
+  }
+
+  .vision-brand {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .vision-badge {
+    margin-left: 0;
+  }
+
+  section {
+    padding: 60px 20px;
+  }
+
+  .contact-grid {
+    gap: 30px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 40px);
+  }
+
+  .experience-timeline {
+    padding-left: 20px;
+  }
+
+  .experience-dot {
+    width: 24px;
+    height: 24px;
+    left: -16px;
+    font-size: 12px;
+  }
+
+  .experience-timeline::before {
+    left: -6px;
+  }
+
+  .stat-number {
+    font-size: 28px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .vision-cta {
+    padding: 30px 20px;
+  }
+
+  .vision-cta-title {
+    font-size: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div id="scrollProgress"></div>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-hex">
+      <img src="images/favicon.png" alt="Kiran Kumar K">
+    </div>
+    <span>KIRAN KUMAR K</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#expertise">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="https://drive.google.com/uc?export=download&id=1LLPX-X7kfoD3jnC73ng4hIcB3ujysn7h" target="_blank" class="btn-nav btn-nav-secondary">
+      <i class="icon" data-lucide="download"></i> Resume
+    </a>
+    <a href="mailto:kirankumark.sec@gmail.com" class="btn-nav btn-nav-primary">
+      <i class="icon" data-lucide="mail"></i> Contact
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for Engagements
+    </div>
+    <h1 class="hero-title" data-text="KIRAN KUMAR K">KIRAN KUMAR K</h1>
+    <p class="hero-subtitle">Enterprise Security Analyst · IISc Bengaluru</p>
+    <p class="hero-description">
+      Cybersecurity professional specializing in VAPT, SOC operations, cloud security, endpoint management, and threat hunting. 50+ web application assessments, 150+ Microsoft Defender incidents investigated, responsible disclosures to NASA and Stanford University. Zero-Trust architecture advocate with proven expertise in reducing organizational risk.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        <i class="icon" data-lucide="arrow-down"></i> View Work
+      </a>
+      <a href="mailto:kirankumark.sec@gmail.com" class="btn-secondary">
+        <i class="icon" data-lucide="mail"></i> Get In Touch
+      </a>
+      <a href="https://github.com/KIRAN-KUMAR-K3" target="_blank" class="btn-secondary">
+        <i class="icon" data-lucide="github"></i> GitHub
+      </a>
+      <a href="https://linkedin.com/in/kiran-kumar-k3" target="_blank" class="btn-secondary">
+        <i class="icon" data-lucide="linkedin"></i> LinkedIn
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Web App VAPTs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Defender Incidents</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">300+</div>
+        <div class="stat-label">Devices Managed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Remediation Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item"><strong>VAPT</strong></span>
+    <span class="marquee-item">Microsoft Sentinel</span>
+    <span class="marquee-item"><strong>Burp Suite Pro</strong></span>
+    <span class="marquee-item">Zero Trust</span>
+    <span class="marquee-item"><strong>NASA Disclosure</strong></span>
+    <span class="marquee-item">Cloud Security</span>
+    <span class="marquee-item"><strong>Wazuh SIEM</strong></span>
+    <span class="marquee-item">Threat Hunting</span>
+    <span class="marquee-item"><strong>Digital Forensics</strong></span>
+    <span class="marquee-item">Intune Management</span>
+    <span class="marquee-item"><strong>Bug Bounty</strong></span>
+    <span class="marquee-item">Incident Response</span>
+    <span class="marquee-item"><strong>VAPT</strong></span>
+    <span class="marquee-item">Microsoft Sentinel</span>
+    <span class="marquee-item"><strong>Burp Suite Pro</strong></span>
+    <span class="marquee-item">Zero Trust</span>
+  </div>
+</div>
+
+<!-- IMPACT DASHBOARD -->
+<section class="section-dark" id="impact">
+  <div class="section-header">
+    <div class="section-eyebrow">Security Impact Dashboard</div>
+    <h2 class="section-title">Measurable <span style="color: var(--accent-cyan);">Security Outcomes</span></h2>
+    <p class="section-description">A live snapshot of scope and impact across offensive testing, SOC operations, cloud security, and enterprise endpoint management.</p>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-icon">🎯</div>
+      <div class="impact-number">50+</div>
+      <div class="impact-title">Web Application VAPTs</div>
+      <div class="impact-desc">OWASP Top 10 methodology, full PoC reporting with CVSS scoring</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">🔍</div>
+      <div class="impact-number">150+</div>
+      <div class="impact-title">Defender Incidents Investigated</div>
+      <div class="impact-desc">Triage, containment, and root-cause analysis with live isolation</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">☁️</div>
+      <div class="impact-number">50+</div>
+      <div class="impact-title">Cloud Alerts Resolved</div>
+      <div class="impact-desc">Microsoft Defender for Cloud posture hardening and remediation</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">💻</div>
+      <div class="impact-number">300+</div>
+      <div class="impact-title">Devices Managed via Intune</div>
+      <div class="impact-desc">Zero-Trust compliance, LAPS, MDE full integration</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">📢</div>
+      <div class="impact-number">50+</div>
+      <div class="impact-title">Security Advisories Published</div>
+      <div class="impact-desc">Organization-wide risk & awareness communication</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon">📋</div>
+      <div class="impact-number">100+</div>
+      <div class="impact-title">Security Reports Delivered</div>
+      <div class="impact-desc">CVSS-scored findings with remediation tracking</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="expertise">
+  <div class="section-header">
+    <div class="section-eyebrow">Security Operations</div>
+    <h2 class="section-title">Security <span style="color: var(--accent-cyan);">Services</span></h2>
+    <p class="section-description">Day-to-day detection, investigation, and response — the operational core of enterprise defense.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <div class="service-title">Microsoft Defender (XDR)</div>
+      <div class="service-description">Endpoint detection and response across 300+ managed devices. Daily triage of 50+ alerts, threat hunting, and live endpoint isolation.</div>
+      <div class="service-tags">
+        <span class="tag">Defender for Endpoint</span>
+        <span class="tag">XDR</span>
+        <span class="tag">EDR</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔭</div>
+      <div class="service-title">Microsoft Sentinel SIEM</div>
+      <div class="service-description">Cloud-native SIEM correlation across identity, endpoint, and network telemetry, feeding structured detections into SOC workflow.</div>
+      <div class="service-tags">
+        <span class="tag">Sentinel</span>
+        <span class="tag">KQL</span>
+        <span class="tag">SIEM</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📡</div>
+      <div class="service-title">Wazuh SIEM</div>
+      <div class="service-description">Agent-based log monitoring giving continuous visibility where Microsoft-native tooling doesn't reach.</div>
+      <div class="service-tags">
+        <span class="tag">Wazuh</span>
+        <span class="tag">Log Collection</span>
+        <span class="tag">Correlation</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <div class="service-title">Threat Hunting & IR</div>
+      <div class="service-description">Proactive hunting for indicators of compromise and live incident response of active cyberattacks.</div>
+      <div class="service-tags">
+        <span class="tag">Threat Hunting</span>
+        <span class="tag">IR</span>
+        <span class="tag">Forensics</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <div class="service-title">Digital Forensics & Log Analysis</div>
+      <div class="service-description">Root-cause investigation across firewall, DHCP, RADIUS, and DNS logs. Python automation cuts MTTR by 40%.</div>
+      <div class="service-tags">
+        <span class="tag">Forensics</span>
+        <span class="tag">Python Automation</span>
+        <span class="tag">NCCC</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔎</div>
+      <div class="service-title">Vulnerability Management</div>
+      <div class="service-description">Continuous scanning and risk-prioritized remediation tracking with 100% compliance rate.</div>
+      <div class="service-tags">
+        <span class="tag">Qualys</span>
+        <span class="tag">Nessus</span>
+        <span class="tag">OpenVAS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section-dark" id="experience">
+  <div class="section-header">
+    <div class="section-eyebrow">Career Path</div>
+    <h2 class="section-title">Work <span style="color: var(--accent-cyan);">Experience</span></h2>
+  </div>
+  <div class="experience-timeline">
+    <div class="experience-item">
+      <div class="experience-dot">🚀</div>
+      <span class="experience-badge">Current Role</span>
+      <h3 class="experience-title">Security Analyst</h3>
+      <p class="experience-company">Indian Institute of Science (IISc) · DIGITS/Information Security Office</p>
+      <p class="experience-date">Jun 2025 – Present</p>
+      <p class="experience-desc">Contributing to the cybersecurity posture of a leading research institute across offensive security, defensive security, cloud security, endpoint security, identity and access management, automation, and security awareness.</p>
+      <div class="achievement-grid">
+        <div class="achievement-card">
+          <strong>Business Impact:</strong> Executed 50+ VAPT assessments reaching 100% remediation compliance. Discovered 563 exposed CCTV cameras across 4 NVR systems.
+        </div>
+        <div class="achievement-card">
+          <strong>Risk Reduction:</strong> Investigated 150+ Defender incidents and 50+ Cloud alerts, isolating compromised endpoints. Deployed phishing-resistant MFA and Wazuh SIEM.
+        </div>
+        <div class="achievement-card">
+          <strong>Security Maturity:</strong> Published 50+ security advisories. Built SOPs for SOC, VAPT, remediation tracking. Contributed to SIEM, NAC, ZTNA initiatives.
+        </div>
+        <div class="achievement-card">
+          <strong>Operational Excellence:</strong> Onboarded 300+ endpoints to Intune with Zero-Trust. Automated IR workflows, reducing MTTR by 40%.
+        </div>
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="experience-dot">📚</div>
+      <span class="experience-badge">Internship</span>
+      <h3 class="experience-title">Information Security Intern</h3>
+      <p class="experience-company">Indian Institute of Science (IISc) · Bengaluru</p>
+      <p class="experience-date">Mar 2025 – Jun 2025</p>
+      <p class="experience-desc">Performed VAPT on 5+ IISc web applications and APIs using OpenVAS and Burp Suite, identifying OWASP Top 10 vulnerabilities with comprehensive PoC documentation. Delivered remediation reports prioritized by CVSS scores.</p>
+    </div>
+
+    <div class="experience-item">
+      <div class="experience-dot">🔍</div>
+      <span class="experience-badge">Independent</span>
+      <h3 class="experience-title">Bug Bounty Researcher</h3>
+      <p class="experience-company">Self-Employed</p>
+      <p class="experience-date">Mar 2023 – Dec 2024</p>
+      <p class="experience-desc">Responsibly disclosed critical vulnerabilities to NASA, Stanford University, and government portals. Professional coordination with security teams for timely remediation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-eyebrow">Featured Work</div>
+    <h2 class="section-title">Key <span style="color: var(--accent-cyan);">Projects</span></h2>
+    <p class="section-description">Real-world security implementations and discoveries from enterprise environments and independent research.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-image">🛡️</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Enterprise
+        </div>
+        <h3 class="project-title">Zero-Trust Endpoint Security — Microsoft Intune</h3>
+        <p class="project-description">Architected and deployed a Zero-Trust endpoint security framework onboarding 500+ devices to Microsoft Intune with enforced compliance policies, automated LAPS rotation, and full MDE integration.</p>
+        <div class="project-tags">
+          <span class="tag">Intune</span>
+          <span class="tag">Zero Trust</span>
+          <span class="tag">LAPS</span>
+          <span class="tag">MDE</span>
+        </div>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">☁️</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Enterprise
+        </div>
+        <h3 class="project-title">Cloud Security Hardening — Azure & MDAPT</h3>
+        <p class="project-description">Implemented Microsoft Defender for Cloud (MDAPT) across all Linux servers for continuous monitoring. Enforced SELinux mandatory access control and disabled xp_cmdshell on MSSQL servers.</p>
+        <div class="project-tags">
+          <span class="tag">MDAPT</span>
+          <span class="tag">SELinux</span>
+          <span class="tag">Azure</span>
+        </div>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">🔒</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Enterprise
+        </div>
+        <h3 class="project-title">Phishing-Resistant MFA Implementation</h3>
+        <p class="project-description">Designed and deployed a phishing-resistant MFA solution with advanced hardening techniques, significantly reducing credential-based attack vectors with Entra ID conditional access.</p>
+        <div class="project-tags">
+          <span class="tag">MFA</span>
+          <span class="tag">Entra ID</span>
+          <span class="tag">Identity</span>
+        </div>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">📹</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Discovery
+        </div>
+        <h3 class="project-title">CCTV Vulnerability Discovery — IISc Campus</h3>
+        <p class="project-description">Discovered 563 CCTV cameras across 4 NVR systems exposed with default credentials. Demonstrated full administrative access via comprehensive PoC. Complete remediation with credential rotation and access controls.</p>
+        <div class="project-tags">
+          <span class="tag">IoT Security</span>
+          <span class="tag">VAPT</span>
+          <span class="tag">PoC</span>
+        </div>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">🤖</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Automation
+        </div>
+        <h3 class="project-title">IR Automation — Python NCCC Report Parser</h3>
+        <p class="project-description">Automated incident response workflows using Python to parse NCCC reports including IOCs, IOAs, and honeypot logs. Achieved 40% reduction in mean response time aligned with NCCC directives.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NCCC</span>
+          <span class="tag">IR Automation</span>
+        </div>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">🔎</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Enterprise
+        </div>
+        <h3 class="project-title">SOC Alert Management & Live Threat Hunting</h3>
+        <p class="project-description">Managed 50+ daily Microsoft Defender for Endpoint alerts and 35+ Azure agentless alerts. Led active threat hunting campaigns, isolated compromised endpoints in real-time, and conducted forensic investigations.</p>
+        <div class="project-tags">
+          <span class="tag">SOC</span>
+          <span class="tag">Threat Hunting</span>
+          <span class="tag">Forensics</span>
+        </div>
+        <div class="project-links">
+          <a href="#contact" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">📋</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          GitHub
+        </div>
+        <h3 class="project-title">Security Hardening Guides</h3>
+        <p class="project-description">A comprehensive interactive hub covering security hardening for Linux servers, APIs, Node.js, React, Flutter, and WordPress. Step-by-step hardening checklists with CIS benchmark alignment.</p>
+        <div class="project-tags">
+          <span class="tag">Linux</span>
+          <span class="tag">CIS</span>
+          <span class="tag">Guides</span>
+        </div>
+        <div class="project-links">
+          <a href="security-hardening-guide/index.html" target="_blank" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Launch</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">🔬</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          GitHub
+        </div>
+        <h3 class="project-title">Metasploitable2 Penetration Testing Lab</h3>
+        <p class="project-description">Built hands-on penetration testing lab using Metasploitable2. Performed enumeration, exploitation, privilege escalation, and post-exploitation with full attack documentation and remediation strategies.</p>
+        <div class="project-tags">
+          <span class="tag">Metasploit</span>
+          <span class="tag">Nmap</span>
+          <span class="tag">VAPT Lab</span>
+        </div>
+        <div class="project-links">
+          <a href="metasploitable2-penetration-testing-lab/index.html" target="_blank" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Launch</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">🌐</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Live
+        </div>
+        <h3 class="project-title">CyberShield — Domain Attack Awareness</h3>
+        <p class="project-description">An interactive domain security awareness platform covering real-world attack vectors — typosquatting, subdomain takeover, DNS hijacking, phishing lookalikes, and more with visual threat simulations.</p>
+        <div class="project-tags">
+          <span class="tag">Domain Security</span>
+          <span class="tag">Awareness</span>
+          <span class="tag">Interactive</span>
+        </div>
+        <div class="project-links">
+          <a href="CyberShield-Domain-Awareness/index.html" target="_blank" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Launch</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">📚</div>
+      <div class="project-content">
+        <div class="project-status">
+          <span class="status-dot"></span>
+          Live
+        </div>
+        <h3 class="project-title">Netorix — Networking Learning Platform</h3>
+        <p class="project-description">A structured networking learning platform taking students from beginner to advanced with guided learning paths, visual explanations, and interactive quizzes covering networking fundamentals.</p>
+        <div class="project-tags">
+          <span class="tag">Education</span>
+          <span class="tag">Networking</span>
+          <span class="tag">Interactive</span>
+        </div>
+        <div class="project-links">
+          <a href="https://kirankumark.in/Netorix/" target="_blank" class="project-link"><i class="icon" data-lucide="arrow-up-right"></i> Visit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION LAB -->
+<section class="section-dark" id="automation">
+  <div class="section-header">
+    <div class="section-eyebrow">Automation Lab</div>
+    <h2 class="section-title">Security <span style="color: var(--accent-cyan);">Automation</span></h2>
+    <p class="section-description">Manual triage doesn't scale. These are the Python and Bash tools built to close that gap in real SOC workflows.</p>
+  </div>
+  <div class="lab-grid">
+    <div class="lab-card">
+      <div class="lab-terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+        </div>
+        <div class="terminal-text">
+          <div><span class="terminal-text">$</span> python3 nccc_parser.py --source honeypot.log</div>
+          <div class="terminal-output">Parsed 1,204 IOC/IOA records → response time −40%</div>
+        </div>
+      </div>
+      <h3 class="lab-title">NCCC Report Parser</h3>
+      <p class="lab-desc">A Python engine that parses NCCC compliance reports — IOCs, IOAs, and honeypot logs — and structures them for immediate triage, cutting mean incident response time by 40%.</p>
+    </div>
+
+    <div class="lab-card">
+      <div class="lab-terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+        </div>
+        <div class="terminal-text">
+          <div><span class="terminal-text">$</span> ./correlate.sh --sophos --radius --dhcp --dns</div>
+          <div class="terminal-output">Cross-referenced 4 log sources → suspect IP isolated</div>
+        </div>
+      </div>
+      <h3 class="lab-title">Forensic Log Correlation</h3>
+      <p class="lab-desc">A Bash correlation engine that cross-references Sophos firewall, RADIUS, DHCP, and DNS logs to trace suspicious activity back to a single source — built for live BEC investigation.</p>
+    </div>
+
+    <div class="lab-card">
+      <div class="lab-terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+        </div>
+        <div class="terminal-text">
+          <div><span class="terminal-text">$</span> python3 wordpress_scan.py --targets subdomains.txt</div>
+          <div class="terminal-output">Scanned ~800 subdomains with 5 detection signals</div>
+        </div>
+      </div>
+      <h3 class="lab-title">WordPress Exposure Scanner</h3>
+      <p class="lab-desc">A Bash/Python scanner using five overlapping detection signals to identify WordPress installations across roughly 800 institutional subdomains ahead of VAPT scheduling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-eyebrow">Technical Capabilities</div>
+    <h2 class="section-title">Skills & <span style="color: var(--accent-cyan);">Expertise</span></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3 class="skill-title">🎯 Offensive Security</h3>
+      <div class="skill-items">
+        <span class="skill-item">Burp Suite Pro</span>
+        <span class="skill-item">Metasploit</span>
+        <span class="skill-item">Nmap</span>
+        <span class="skill-item">SQLMap</span>
+        <span class="skill-item">OWASP Top 10</span>
+        <span class="skill-item">Kali Linux</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">🔭 SOC & SIEM</h3>
+      <div class="skill-items">
+        <span class="skill-item">Microsoft Sentinel</span>
+        <span class="skill-item">Defender MDE</span>
+        <span class="skill-item">Wazuh SIEM</span>
+        <span class="skill-item">Splunk</span>
+        <span class="skill-item">KQL Queries</span>
+        <span class="skill-item">Log Analysis</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">☁️ Cloud Security</h3>
+      <div class="skill-items">
+        <span class="skill-item">Azure AD</span>
+        <span class="skill-item">Defender for Cloud</span>
+        <span class="skill-item">AWS Security</span>
+        <span class="skill-item">CSPM</span>
+        <span class="skill-item">MDAPT</span>
+        <span class="skill-item">Network Security</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">💻 Endpoint Security</h3>
+      <div class="skill-items">
+        <span class="skill-item">Microsoft Intune</span>
+        <span class="skill-item">LAPS</span>
+        <span class="skill-item">ASR Rules</span>
+        <span class="skill-item">Windows Defender</span>
+        <span class="skill-item">CrowdStrike</span>
+        <span class="skill-item">Zero Trust</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">🔑 Identity Security</h3>
+      <div class="skill-items">
+        <span class="skill-item">Entra ID</span>
+        <span class="skill-item">MFA/FIDO2</span>
+        <span class="skill-item">Conditional Access</span>
+        <span class="skill-item">PIM/JIT</span>
+        <span class="skill-item">Access Control</span>
+        <span class="skill-item">LAPS</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">🤖 Automation & Scripting</h3>
+      <div class="skill-items">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">Bash</span>
+        <span class="skill-item">SQL</span>
+        <span class="skill-item">PowerShell</span>
+        <span class="skill-item">Log Parsing</span>
+        <span class="skill-item">Workflow Automation</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">🏗️ Architecture & Design</h3>
+      <div class="skill-items">
+        <span class="skill-item">Zero Trust</span>
+        <span class="skill-item">NAC/PacketFence</span>
+        <span class="skill-item">ZTNA</span>
+        <span class="skill-item">Network Security</span>
+        <span class="skill-item">Security Design</span>
+        <span class="skill-item">SIEM Integration</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3 class="skill-title">🧪 Application Security</h3>
+      <div class="skill-items">
+        <span class="skill-item">API Security</span>
+        <span class="skill-item">SAST/DAST</span>
+        <span class="skill-item">Code Review</span>
+        <span class="skill-item">OWASP Testing</span>
+        <span class="skill-item">Web Security</span>
+        <span class="skill-item">Secure SDLC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section-dark" id="certs">
+  <div class="section-header">
+    <div class="section-eyebrow">Credentials</div>
+    <h2 class="section-title">Certifications & <span style="color: var(--accent-cyan);">Training</span></h2>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <span class="cert-icon">🛡️</span>
+      <h3 class="cert-name">Ethical Hacking (CEH-style)</h3>
+      <p class="cert-issuer">Penetration Testing Track</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">☁️</span>
+      <h3 class="cert-name">Azure Security Engineering</h3>
+      <p class="cert-issuer">Microsoft Cloud Security</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">🔍</span>
+      <h3 class="cert-name">SOC Operations</h3>
+      <p class="cert-issuer">Security Operations Training</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">🐛</span>
+      <h3 class="cert-name">Bug Bounty Researcher</h3>
+      <p class="cert-issuer">Bugcrowd Active Researcher</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-header">
+    <div class="section-eyebrow">Security Research</div>
+    <h2 class="section-title">Bug Bounty & Responsible <span style="color: var(--accent-cyan);">Disclosure</span></h2>
+    <p class="section-description">Independent security research with responsible disclosures to major organizations and government portals.</p>
+  </div>
+  <div class="bounty-grid">
+    <div class="bounty-card">
+      <div style="display: flex; justify-content: space-between; align-items: start;">
+        <div>
+          <h3 class="bounty-org">🚀 NASA</h3>
+          <p class="bounty-vuln">Bulk Directory Listing — Exposed sensitive files and information disclosure vulnerability</p>
+        </div>
+        <span class="bounty-severity severity-critical">CRITICAL</span>
+      </div>
+    </div>
+
+    <div class="bounty-card">
+      <div style="display: flex; justify-content: space-between; align-items: start;">
+        <div>
+          <h3 class="bounty-org">🏫 Stanford University</h3>
+          <p class="bounty-vuln">AWS S3 Misconfiguration — Improperly configured bucket exposing institutional data</p>
+        </div>
+        <span class="bounty-severity severity-critical">CRITICAL</span>
+      </div>
+    </div>
+
+    <div class="bounty-card">
+      <div style="display: flex; justify-content: space-between; align-items: start;">
+        <div>
+          <h3 class="bounty-org">🏛️ Hrylabour.gov.in</h3>
+          <p class="bounty-vuln">Reflected XSS — Government Labour Portal vulnerability affecting user sessions</p>
+        </div>
+        <span class="bounty-severity severity-high">HIGH</span>
+      </div>
+    </div>
+
+    <div class="bounty-card">
+      <div style="display: flex; justify-content: space-between; align-items: start;">
+        <div>
+          <h3 class="bounty-org">🌿 Patanjaliayurved.net</h3>
+          <p class="bounty-vuln">Cross-Site Scripting (XSS) — High-severity vulnerability enabling session hijacking</p>
+        </div>
+        <span class="bounty-severity severity-high">HIGH</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision-section">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+    <div class="vision-brand">
+      <div class="vision-hex">
+        <img src="images/favicon.png" alt="Kinetik">
+      </div>
+      <div>
+        <h2 class="vision-name">Kinetik Security Solutions</h2>
+        <p class="vision-tag">Future Vision · Cybersecurity Enterprise</p>
+      </div>
+      <div class="vision-badge">
+        <span class="vision-dot"></span>
+        Concept Stage
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="section-eyebrow">Future Vision</div>
+      <h2 class="section-title">Building the <span style="color: var(--accent-cyan);">Future</span> of Cybersecurity</h2>
+      <p class="section-description">A concept for a next-generation cybersecurity firm focused on AI-powered threat detection, offensive security research, and enterprise-grade protection.</p>
+    </div>
+
+    <div class="vision-grid">
+      <div class="vision-card">
+        <div class="vision-icon">🤖</div>
+        <h3 class="vision-title">AI-Powered Detection</h3>
+        <div class="vision-items">
+          <div class="vision-item">Behavioral anomaly detection</div>
+          <div class="vision-item">ML-driven threat hunting</div>
+          <div class="vision-item">Automated response playbooks</div>
+        </div>
+      </div>
+      <div class="vision-card">
+        <div class="vision-icon">⚔️</div>
+        <h3 class="vision-title">Offensive Research</h3>
+        <div class="vision-items">
+          <div class="vision-item">Red team operations</div>
+          <div class="vision-item">Zero-day research</div>
+          <div class="vision-item">Advanced persistent threat sims</div>
+        </div>
+      </div>
+      <div class="vision-card">
+        <div class="vision-icon">🏢</div>
+        <h3 class="vision-title">Enterprise Platform</h3>
+        <div class="vision-items">
+          <div class="vision-item">Unified security dashboard</div>
+          <div class="vision-item">Compliance automation</div>
+          <div class="vision-item">Real-time risk scoring</div>
+        </div>
+      </div>
+      <div class="vision-card">
+        <div class="vision-icon">🌍</div>
+        <h3 class="vision-title">Threat Intelligence</h3>
+        <div class="vision-items">
+          <div class="vision-item">Dark web monitoring</div>
+          <div class="vision-item">IOC feeds & enrichment</div>
+          <div class="vision-item">Geopolitical threat landscape</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vision-cta">
+      <h3 class="vision-cta-title">Ready to Collaborate?</h3>
+      <p class="vision-cta-desc">Whether it's a VAPT engagement, security consulting, or building the future of cybersecurity together — let's connect.</p>
+      <div class="vision-cta-actions">
+        <a href="mailto:kirankumark.sec@gmail.com" class="btn-primary">
+          <i class="icon" data-lucide="mail"></i> Start a Conversation
+        </a>
+        <a href="https://linkedin.com/in/kiran-kumar-k3" target="_blank" class="btn-secondary">
+          <i class="icon" data-lucide="linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-dark" id="contact">
+  <div class="section-header">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2 class="section-title">Let's Work <span style="color: var(--accent-cyan);">Together</span></h2>
+    <p class="section-description">Have a security challenge? Need VAPT, consulting, or collaboration on security initiatives?</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <a href="mailto:kirankumark.sec@gmail.com" class="contact-method">
+        <div class="contact-icon"><i data-lucide="mail"></i></div>
+        <div class="contact-text">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">kirankumark.sec@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+918310937381" class="contact-method">
+        <div class="contact-icon"><i data-lucide="phone"></i></div>
+        <div class="contact-text">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91 8310937381</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/kiran-kumar-k3" target="_blank" class="contact-method">
+        <div class="contact-icon"><i data-lucide="linkedin"></i></div>
+        <div class="contact-text">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">linkedin.com/in/kiran-kumar-k3</div>
+        </div>
+      </a>
+      <a href="https://github.com/KIRAN-KUMAR-K3" target="_blank" class="contact-method">
+        <div class="contact-icon"><i data-lucide="github"></i></div>
+        <div class="contact-text">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">github.com/KIRAN-KUMAR-K3</div>
+        </div>
+      </a>
+      <a href="https://bugcrowd.com/KIRAN-KUMAR-K" target="_blank" class="contact-method">
+        <div class="contact-icon"><i data-lucide="bug"></i></div>
+        <div class="contact-text">
+          <div class="contact-label">Bugcrowd</div>
+          <div class="contact-value">bugcrowd.com/KIRAN-KUMAR-K</div>
+        </div>
+      </a>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" required placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input type="text" class="form-input" required placeholder="VAPT / Consulting...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" required placeholder="Tell me about your security project..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">
+        <i class="icon" data-lucide="send"></i> Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="footer-hex">
+        <img src="images/favicon.png" alt="Kiran Kumar K">
+      </div>
+      <div class="footer-text">
+        <strong>Kiran Kumar K</strong> · Cybersecurity Analyst · Bengaluru, India
+      </div>
+    </div>
+    <div class="footer-copyright">
+      © <span id="yearSpan"></span> Kiran Kumar K. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+if (window.lucide) lucide.createIcons();
+
+// SCROLL PROGRESS
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  scrollProgress.style.width = scrolled + '%';
+}, { passive: true });
+
+// ACTIVE NAV
+const navLinks = document.querySelectorAll('#navLinks a');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+}, { passive: true });
+
+// THREE.JS HERO
+const canvas = document.getElementById('heroCanvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+camera.position.z = 3;
+
+// Particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 300;
+const posArray = new Float32Array(particlesCount * 3);
+
+for (let i = 0; i < particlesCount * 3; i += 3) {
+  posArray[i] = (Math.random() - 0.5) * 50;
+  posArray[i + 1] = (Math.random() - 0.5) * 50;
+  posArray[i + 2] = (Math.random() - 0.5) * 50;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+const particlesMaterial = new THREE.PointsMaterial({
+  size: 0.2,
+  color: 0x00d4ff,
+  sizeAttenuation: true,
+  transparent: true,
+  opacity: 0.5
+});
+
+const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particles);
+
+function animate() {
+  requestAnimationFrame(animate);
+  particles.rotation.y += 0.0001;
+  particles.rotation.x += 0.00005;
+  renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// FORM SUBMISSION
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const inputs = e.target.querySelectorAll('input, textarea');
+  const [name, email, subject, message] = inputs;
+  window.location.href = `mailto:kirankumark.sec@gmail.com?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent(`Name: ${name.value}\nEmail: ${email.value}\n\n${message.value}`)}`;
+});
+
+// FOOTER YEAR
+document.getElementById('yearSpan').textContent = new Date().getFullYear();
+
+// SCROLL SMOOTH
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    target && target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+console.log('✓ Premium Cybersecurity Portfolio Loaded');
+</script>
+</body>
+</html>
